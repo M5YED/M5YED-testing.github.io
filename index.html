@@ -586,41 +586,38 @@
 
 <!-- JavaScript for Airtable Integration -->
 <script>
-    function submitToAirtable(event) {
-        event.preventDefault();
+      function submitToAirtable(event) {
         const email = document.querySelector('input[name="email"]').value;
 
-        
-        const baseId = 'appHdf8GqdnnZ8eQE'; 
-        const tableName = 'Table%201'; 
+        // Airtable API configuration
+        const baseId = 'appHdf8GqdnnZ8eQE';
+        const tableName = 'Newsletter';
         const airtableUrl = `https://api.airtable.com/v0/${baseId}/${tableName}`;
-
-        
         const apiKey = 'patb0pXMNIXvXABCA.8225b205c549ce52bb118a86e4df78675668274cff5e6f71d8db0280d854dcff'; 
-        // Create the record for Airtable
+
+        // Create record data for Airtable
         const data = {
-            fields: {
-                Email: email 
-            }
+          fields: {
+            Email: email 
+          }
         };
 
         // Make the POST request to Airtable API
         fetch(airtableUrl, {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${apiKey}`,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${apiKey}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
         })
         .then(response => response.json())
         .then(data => {
-            alert('Thank you for subscribing!');
-            document.getElementById('subscribeForm').reset();
+          // Alert is shown in the Voiceflow chat event listener
         })
         .catch(error => console.error('Error:', error));
-    }
-</script>
+      }
+    </script>
 </section>
 </footer>
 </html>
